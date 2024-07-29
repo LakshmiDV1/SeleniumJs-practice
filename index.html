@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkbox with Add Button</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .checkbox-container input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+        .checkbox-container label {
+            font-size: 16px;
+        }
+        .input-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .input-container input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            margin-right: 10px;
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .add-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .add-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="checkboxList">
+            <div class="checkbox-container">
+                <input type="checkbox" id="checkbox1">
+                <label for="checkbox1">Option 1</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="checkbox2">
+                <label for="checkbox2">Option 2</label>
+            </div>
+            <div class="checkbox-container">
+                <input type="checkbox" id="checkbox3">
+                <label for="checkbox3">Option 3</label>
+            </div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="newOption" placeholder="want to add more">
+            <button class="add-button" onclick="addCheckbox()">Add</button>
+        </div>
+    </div>
+
+    <script>
+        function addCheckbox() {
+            const newOptionText = document.getElementById('newOption').value.trim();
+            if (newOptionText === "") {
+                alert("Please enter a valid option.");
+                return;
+            }
+
+            const newCheckboxContainer = document.createElement('div');
+            newCheckboxContainer.className = 'checkbox-container';
+
+            const newCheckbox = document.createElement('input');
+            newCheckbox.type = 'checkbox';
+            newCheckbox.id = newOptionText.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+            const newLabel = document.createElement('label');
+            newLabel.htmlFor = newCheckbox.id;
+            newLabel.textContent = newOptionText;
+
+            newCheckboxContainer.appendChild(newCheckbox);
+            newCheckboxContainer.appendChild(newLabel);
+
+            document.getElementById('checkboxList').appendChild(newCheckboxContainer);
+            document.getElementById('newOption').value = "";
+        }
+    </script>
+</body>
+</html>
